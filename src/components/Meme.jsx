@@ -1,3 +1,5 @@
+import Draggable from "react-draggable"
+
 function Meme({
   topText,
   bottomText,
@@ -5,9 +7,14 @@ function Meme({
 }) {
   return (
     <div className="meme">
-      <img src={imgUrl} />
-      <span className="top">{topText}</span>
-      <span className="bottom">{bottomText}</span>
+      <img src={imgUrl} alt="meme" />
+
+      <Draggable>
+        <h2 className="top">{topText}</h2>
+      </Draggable>
+      <Draggable>
+        <h2 className="bottom">{bottomText}</h2>
+      </Draggable>
     </div>
   )
 }
