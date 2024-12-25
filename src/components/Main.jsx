@@ -10,13 +10,13 @@ function Main() {
     textBlocks: [
       {
         id: 1,
-        text: 'top text',
-        postion: { x: 50, y: 50 }
+        text: 'text',
+        postion: { x: 50, y: 10 }
       },
       {
         id: 2,
-        text: 'bottom text',
-        postion: { x: 50, y: 200 }
+        text: 'text',
+        postion: { x: 50, y: 50 }
       }
     ]
   })
@@ -31,7 +31,7 @@ function Main() {
             {
               id: Date.now(),
               text: 'text',
-              postion: { x: 0, y: 0 }
+              postion: { x: 50, y: 0 }
             }
           ]
         }
@@ -61,13 +61,12 @@ function Main() {
     }))
   }
 
-  // const handleChange = e => {
-  //   const { value, name } = e.currentTarget
-  //   setMeme(prevMeme => ({
-  //     ...prevMeme,
-  //     [name]: value // this js feature is called Computed property names
-  //   }))
-  // }
+  const deleteTextBlock = id => {
+    setMeme(prevMeme => ({
+      ...prevMeme,
+      textBlocks: prevMeme.textBlocks.filter(block => block.id !== id)
+    }))
+  }
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
@@ -97,6 +96,7 @@ function Main() {
         textBlocks={meme.textBlocks}
         updateText={updateText}
         updatePosition={updatePosition}
+        deleteTextBlock={deleteTextBlock}
       />
       <button onClick={addTextBlock} className='add'>Add Text Block</button>
     </main>

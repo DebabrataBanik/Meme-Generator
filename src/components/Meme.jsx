@@ -5,7 +5,8 @@ function Meme({
   imgUrl,
   textBlocks = [],
   updateText,
-  updatePosition
+  updatePosition,
+  deleteTextBlock,
 }) {
   return (
     <div className="meme">
@@ -25,15 +26,21 @@ function Meme({
               <div className="textBox__container">
                 <textarea className="textBox"
                   type="text"
-                  placeholder="inset text"
+                  placeholder="insert text"
                   value={block.text}
                   onChange={(e) => {
                     updateText(block.id, e.target.value);
                     e.target.style.height = "auto";
                     e.target.style.height = `${e.target.scrollHeight}px`;
                   }}
-
                 />
+                <button
+                  className="delete"
+                  onClick={() => deleteTextBlock(block.id)}
+                >
+                  &#x2715;
+                </button>
+
               </div>
 
             </Draggable>
