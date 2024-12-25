@@ -3,21 +3,71 @@ import Meme from './Meme'
 
 function Main() {
 
-  const [meme, setMeme] = useState({
-    topText: 'top text',
-    bottomText: 'bottom text',
-    imgUrl: 'http://i.imgflip.com/1bij.jpg'
-  })
-
   const [memeArr, setMemeArr] = useState([])
 
-  const handleChange = e => {
-    const { value, name } = e.currentTarget
+  const [meme, setMeme] = useState({
+    imgUrl: 'http://i.imgflip.com/1bij.jpg',
+    textBlocks: [
+      {
+        id: 1,
+        text: 'top text',
+        postion: { x: 50, y: 50 }
+      },
+      {
+        id: 2,
+        text: 'bottom text',
+        postion: { x: 50, y: 200 }
+      }
+    ]
+  })
+
+  const addTextBlock = () => {
+    if (meme.textBlocks.length < 5) {
+      setMeme(prevMeme => (
+        {
+          ...prevMeme,
+          textBlocks: [
+            ...prevMeme.textBlocks,
+            {
+              id: Date.now(),
+              text: 'text',
+              postion: { x: 0, y: 0 }
+            }
+          ]
+        }
+      ))
+    } else {
+      alert('You can only add upto 5 text blocks!')
+    }
+  }
+
+  const updateText = (id, newText) => {
     setMeme(prevMeme => ({
       ...prevMeme,
-      [name]: value // this js feature is called Computed property names
+      textBlocks: prevMeme.textBlocks.map(block => block.id === id ? {
+        ...block,
+        text: newText
+      } : block)
     }))
   }
+
+  const updatePosition = (id, newPosi) => {
+    setMeme(prevMeme => ({
+      ...prevMeme,
+      textBlocks: prevMeme.textBlocks.map(block => block.id === id ? {
+        ...block,
+        position: newPosi
+      } : block)
+    }))
+  }
+
+  // const handleChange = e => {
+  //   const { value, name } = e.currentTarget
+  //   setMeme(prevMeme => ({
+  //     ...prevMeme,
+  //     [name]: value // this js feature is called Computed property names
+  //   }))
+  // }
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
@@ -27,8 +77,6 @@ function Main() {
 
   const changeMemeImg = () => {
     const rdnIdx = Math.floor(Math.random() * memeArr.length)
-    const newMemeImg = memeArr[rdnIdx].url
-    console.log(newMemeImg)
     setMeme(prevMeme => ({
       ...prevMeme,
       imgUrl: memeArr[rdnIdx].url
@@ -38,34 +86,19 @@ function Main() {
   return (
     <main className='main'>
       <section className='form'>
-        <div className='left'>
-          <label htmlFor="top">Top text</label>
 
-          <input
-            type="text"
-            id="top"
-            name='topText'
-            placeholder='Shut up'
-            value={meme.topText}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='right'>
-          <label htmlFor="bottom">Bottom text</label>
-          <input
-            type="text"
-            id="bottom"
-            name='bottomText'
-            placeholder='And take my money'
-            value={meme.bottomText}
-            onChange={handleChange}
-          />
-        </div>
         <button onClick={changeMemeImg} className='submit'>Get a new meme image</button>
 
       </section>
 
-      <Meme {...meme} />
+
+      <Meme
+        imgUrl={meme.imgUrl}
+        textBlocks={meme.textBlocks}
+        updateText={updateText}
+        updatePosition={updatePosition}
+      />
+      <button onClick={addTextBlock} className='add'>Add Text Block</button>
     </main>
   )
 }
