@@ -3,14 +3,24 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Screenshots](#screenshots)
+- [Live Site](#live-site)
 - [Features](#features)
 - [Built-with](#built-with)
 - [Usage](#usage)
-- [Live Demo](#live-demo)
+- [Continued Development](#continued-development)
 
 ### Overview
 
 Meme Generator is an interactive web application built with React that allows users to create and customize memes. It includes dynamic features like drag-and-drop text positioning, real-time text editing, and integration with a public meme image API.
+
+### Screenshots
+
+![alt text](<public/live site ss.png>)
+
+### Live Site
+
+This application is deployed on Vercel: [Live Site](https://meme-builder.vercel.app/)
 
 ### Features
 
@@ -39,10 +49,6 @@ Meme Generator is an interactive web application built with React that allows us
 3. **Reposition Text**: Drag and drop text blocks to desired positions.
 
 4. **Edit Text**: Update text directly in the textarea inputs. Dynamic resizing ensures the content fits.
-
-### Live Demo
-
-This application is deployed on Vercel: [Live Demo]()
 
 
 ### Continued Development
