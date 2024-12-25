@@ -12,11 +12,6 @@ function Main() {
         id: 1,
         text: 'text',
         postion: { x: 50, y: 10 }
-      },
-      {
-        id: 2,
-        text: 'text',
-        postion: { x: 50, y: 50 }
       }
     ]
   })
